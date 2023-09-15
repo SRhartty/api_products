@@ -18,10 +18,10 @@ class UserController extends Controller
 
     public function images(StoreUpdateUserRequest $request)
     {
-        if(!$request->hasfile('image_path')){
+        if(!$request->hasfile('image')){
             return null;
         }
-        $imagem = $request->file('image_path')->store('user_imagens');
+        $imagem = $request->file('image')->store('user_imagens');
         return '/storage/'.$imagem;
     }
 
