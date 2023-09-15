@@ -6,6 +6,10 @@ Api feita com intuito de estudar o back-end use a vontade
 
 Crie O arquivo .env usando o .env.example e atualize seus dados do banco de dados!!!
 
+Instale o composer e instale os pacotes.
+
+Rode o comando php artisan migrate para atualizar o banco de dados.
+
 ## FUNCIONALIDADES
 
 - Criar token de acesso
