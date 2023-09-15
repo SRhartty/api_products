@@ -42,7 +42,7 @@ class ProductController extends Controller
                 $imagem = $image->store('product_imagens');
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'path_image' => $imagem,
+                    'path_image' => '/storage/'.$imagem,
                 ]);
             }
         }
