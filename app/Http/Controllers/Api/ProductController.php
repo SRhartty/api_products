@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use App\Models\ProductImage;
 
 class ProductController extends Controller
 {
@@ -35,18 +34,9 @@ class ProductController extends Controller
         $data = $request->all();
         $product = Product::create($data);
 
-        if ($request->hasFile('galery_images')) {
-            $images = $request->file('galery_images');
-
-            foreach ($images as $image) {
-                $imagem = $image->store('product_imagens');
-                ProductImage::create([
-                    'product_id' => $product->id,
-                    'path_image' => '/storage/'.$imagem,
-                ]);
-            }
-        }
-        return new ProductResource($product);
+        return response()->json([
+            'product_id' => $product->id,
+        ], status: 201);
     }
 
     /**
