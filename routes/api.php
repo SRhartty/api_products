@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\tokenControler;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
-use App\Models\product;
+use App\Http\Controllers\Api\ProductImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,4 +32,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/products/{id}', [ProductController::class, 'show']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
     Route::put('/products/{id}', [ProductController::class, 'update']);
+
+    Route::post('/products/{product_id}/addimagens', [ProductImageController::class, 'store']);
+    Route::delete('/products/{product_id}/deleteimagens', [ProductImageController::class, 'destroy']);
+    Route::get('/products/{product_id}/imagens', [ProductImageController::class, 'show']);
 });
