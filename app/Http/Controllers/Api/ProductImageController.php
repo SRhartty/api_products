@@ -32,12 +32,12 @@ class ProductImageController extends Controller
                 $imagePath = $image->store('product_imagens');
                 $productImage = new ProductImage([
                     'product_id' => $product->id,
-                    'path_image' => '/storage/' . $imagePath
+                    'path_image' => $imagePath
                 ]);
                 $productImage->save();
                 $createdImages[] = [
                     'id' => $productImage->id,
-                    'path_image' => $productImage->path_image
+                    'path_image' =>'/storage/'. $productImage->path_image
                 ];
             }
         }
