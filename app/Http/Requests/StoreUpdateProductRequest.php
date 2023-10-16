@@ -28,22 +28,12 @@ class StoreUpdateProductRequest extends FormRequest
                 'max:255'
             ],
             'description' => [
-                'required',
+                'nullable',
                 'string'
             ],
             'short_descripton' => [
                 'required',
                 'string'
-            ],
-            'galery_images' => [
-                'nullable',
-                'array'
-            ],
-            'galery_images.*' => [
-                'nullable',
-                'image',
-                'mimes:jpeg,png,gif',
-                'max:2048'
             ],
             'stock' => [
                 'required',

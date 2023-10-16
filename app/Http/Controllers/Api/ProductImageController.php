@@ -4,12 +4,21 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreImagemProductRequest;
+use App\Http\Resources\ProductImageResource;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Support\Facades\Storage;
 
 class ProductImageController extends Controller
 {
+
+    public function index() {
+        $images = ProductImage::all();
+        dd($images);
+        return ProductImageResource::collection($images);
+    }
+
     public function show(string $product_id)
     {
 
@@ -18,7 +27,7 @@ class ProductImageController extends Controller
         return response()->json([$images]);
     }
 
-    public function store(Request $request, string $product_id)
+    public function store(StoreImagemProductRequest $request, string $product_id)
     {
 
         $product = Product::findOrFail($product_id);
@@ -32,12 +41,12 @@ class ProductImageController extends Controller
                 $imagePath = $image->store('product_imagens');
                 $productImage = new ProductImage([
                     'product_id' => $product->id,
-                    'path_image' => $imagePath
+                    'path_image' => '/storage/'.$imagePath
                 ]);
                 $productImage->save();
                 $createdImages[] = [
                     'id' => $productImage->id,
-                    'path_image' =>'/storage/'. $productImage->path_image
+                    'path_image' => $productImage->path_image
                 ];
             }
         }
