@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-     
+
 
 
     protected $fillable = [
@@ -20,7 +20,8 @@ class Product extends Model
         'price'
     ];
 
-    public function images(){
+    public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
 }
