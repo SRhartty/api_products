@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() : AnonymousResourceCollection
     {
         $products = Product::with('images')->get();
         return ProductResource::collection($products);
@@ -59,7 +60,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreUpdateProductRequest $request, string $id)
+    public function update(StoreUpdateProductRequest $request, string $id) : ProductResource
     {
         $product = Product::findOrFail($id);
         $data = $request->validated();
